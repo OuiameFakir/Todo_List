@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardBody, CardTitle, CardText, CardFooter } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Task } from '../types/Type';
+import { ITask } from '../types/Type';
 import DeleteTask from './DeleteTask';
 import CardHandle from './CardHandle';
 
 interface CardNoteProps {
-  taskObj: Task;
+  taskObj: ITask;
 }
 
 const CardNote: React.FC<CardNoteProps> = ({ taskObj }) => {

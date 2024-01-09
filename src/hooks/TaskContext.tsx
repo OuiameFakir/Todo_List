@@ -1,6 +1,6 @@
 // TaskContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Task } from '../types/Type';
+import { ITask } from '../types/Type';
 
 
 interface TaskContextProps {
@@ -8,11 +8,11 @@ interface TaskContextProps {
 }
 
 interface TaskContextValue {
-  tasks: Task[];
-  task: Task;
-  filtredTasks: Task[];
-  addTask: (task: Task) => void;
-  updateTask: (taskId: string, updatedTask: Task) => void;
+  tasks: ITask[];
+  task: ITask;
+  filtredTasks: ITask[];
+  addTask: (task: ITask) => void;
+  updateTask: (taskId: string, updatedTask: ITask) => void;
   deleteTask: (idCard: string) => void;
   filterTasks: (priority: string) => void;
 }
@@ -20,21 +20,21 @@ interface TaskContextValue {
 const TaskContext = createContext<TaskContextValue | undefined>(undefined);
 
 const TaskProvider: React.FC<TaskContextProps> = ({ children }) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [filtredTasks, setFiltredTasks]=useState<Task[]>([]);
-  const [task, setTask] = useState<Task>({
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [filtredTasks, setFiltredTasks]=useState<ITask[]>([]);
+  const [task, setTask] = useState<ITask>({
     id: '',
     name: '',
     description: '',
     priority: '',
   });
 
-  const addTask = (newTask: Task) => {
+  const addTask = (newTask: ITask) => {
     setTasks([...tasks, newTask]);
     setFiltredTasks([...tasks, newTask]);
   };
 
-  const updateTask = (taskId: string, updatedTask: Task) => {
+  const updateTask = (taskId: string, updatedTask: ITask) => {
     const taskIndex = tasks.findIndex((t) => t.id === taskId);
     const updatedTasks = [...tasks];
     updatedTasks[taskIndex] = updatedTask;
