@@ -4,3 +4,9 @@ export interface ITask {
     description: string;
     priority: string;
   }
+  export interface ITodos{
+    userId: number,
+    id: number,
+    title: string,
+    completed: boolean,
+  }

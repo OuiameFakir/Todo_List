@@ -4,15 +4,16 @@ import { TaskProvider } from './hooks/TaskContext';
 import TodoList from './components/TodoList'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router-dom';
-import Fetch from './TRY/Fetch_Todo_api';
+import Todos from './TRY/apiTodos';
 
 const App: React.FC = () => {
   return (
     <TaskProvider>
       <div className="App">
         <Routes>
+        {/* <Route path='/' element={<Query />}/> */}
           <Route path='/' element={<TodoList />}/>
-          <Route path='/api-todos' element={<Fetch  />}/>
+          <Route path='/api-todos' element={<Todos  />}/>
         </Routes>
       </div>
     </TaskProvider>

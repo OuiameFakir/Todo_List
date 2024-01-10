@@ -1,6 +1,6 @@
 import CardNote from './Card';
 import { useTaskContext } from '../hooks/TaskContext';
-import NavBar from './Navbar';
+import NavBar from './MyNavbar';
 import { Col, Row } from 'reactstrap';
 
 
