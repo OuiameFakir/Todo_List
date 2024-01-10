@@ -1,12 +1,12 @@
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useTaskContext } from '../hooks/TaskContext';
-import { Task } from '../types/Type';
+import { ITask } from '../types/Type';
 
 interface DeleteTaskProps{
   modal: boolean;
   toggle: ()=> void;
-  task: Task;
+  task: ITask;
 }
 
 const DeleteTask: React.FC<DeleteTaskProps> = ({modal, toggle, task}) => {

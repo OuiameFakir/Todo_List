@@ -2,17 +2,16 @@
 import {UseFormReturn, useForm, SubmitHandler} from 'react-hook-form';
 import Schema from '../formValidation/Schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Task } from '../types/Type';
-import { FC, useEffect } from 'react';
+import { ITask } from '../types/Type';
+import { FC } from 'react';
 import { useTaskContext } from '../hooks/TaskContext';
 import { v4 as uuidv4 } from "uuid";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-
 interface ICardHandleProps{
   isModal: boolean;
   handleToggle: ()=> void;
-  taskObj: Task;
+  taskObj: ITask;
   isCreated: boolean;
   isEdited: boolean;
 }
@@ -35,21 +34,16 @@ const CardHandle:FC<ICardHandleProps> = ({isModal, handleToggle,taskObj, isCreat
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   }: UseFormReturn<IMyFormValues> = useForm<IMyFormValues>({
     resolver: yupResolver(Schema),
-    // defaultValues: {
-    //   name: taskObj.name,
-    //   description: taskObj.description,
-    //   priority: taskObj.priority,
-    // },
+    defaultValues: {
+      name: taskObj.name,
+      description: taskObj.description,
+      priority: taskObj.priority,
+    },
   });
-  // useEffect(() => {
-  //   setValue('name', taskObj.name);
-  //   setValue('description', taskObj.description);
-  //   setValue('priority', taskObj.priority);
-  // }, [taskObj, setValue]);
+
   const onSubmit: SubmitHandler<IMyFormValues> = (data) => {
     if(isCreated){
       const newTask = {
@@ -59,19 +53,22 @@ const CardHandle:FC<ICardHandleProps> = ({isModal, handleToggle,taskObj, isCreat
           priority: data.priority,
         };
         addTask(newTask)
+        reset();
   }else if(isEdited){
       const newTask = {
           id: taskObj.id,
-          name: taskObj.name,
-          description: taskObj.description,
-          priority: taskObj.priority,
+          name: data.name,
+          description: data.description,
+          priority: data.priority,
       };
       updateTask(taskObj.id,newTask);
   }
   handleToggle();
   }
   const handleCancel =()=>{
-    reset();
+    if(isCreated){
+      reset();
+    }
     handleToggle();
   }
   
@@ -146,13 +143,13 @@ export default CardHandle;
 // import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikHelpers} from 'formik';
 // import Schema from '../formValidation/Schema';
 // import { v4 as uuidv4 } from "uuid";
-// import { Task } from '../types/Type';
+// import { ITask } from '../types/Type';
 // import { FC } from 'react';
 
 // interface CardHandleProps{
 //   modal: boolean;
 //   toggle: ()=> void;
-//   taskObj: Task;
+//   taskObj: ITask;
 //   create: boolean;
 //   edit: boolean;
 // }

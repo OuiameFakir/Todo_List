@@ -4,6 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import CardHandle from './CardHandle';
 import { useTaskContext } from '../hooks/TaskContext';
+import { Link } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
   const { task, filterTasks } = useTaskContext();
@@ -28,6 +29,7 @@ const NavBar: React.FC = () => {
               <DropdownItem onClick={() => filterTasks('Low')}>Lowest Priority Tasks</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
+          <NavLink><Link to='/api-todos' className='text-decoration-none'>Todos</Link></NavLink>
         </Nav>
         <Nav className="mx-3">
           <NavItem>
