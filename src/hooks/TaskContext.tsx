@@ -1,7 +1,6 @@
 // TaskContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { ITask } from '../types/Type';
-
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { ITask } from "../types/Type";
 
 interface TaskContextProps {
   children: ReactNode;
@@ -21,12 +20,12 @@ const TaskContext = createContext<TaskContextValue | undefined>(undefined);
 
 const TaskProvider: React.FC<TaskContextProps> = ({ children }) => {
   const [tasks, setTasks] = useState<ITask[]>([]);
-  const [filtredTasks, setFiltredTasks]=useState<ITask[]>([]);
+  const [filtredTasks, setFiltredTasks] = useState<ITask[]>([]);
   const [task, setTask] = useState<ITask>({
-    id: '',
-    name: '',
-    description: '',
-    priority: '',
+    id: "",
+    name: "",
+    description: "",
+    priority: "",
   });
 
   const addTask = (newTask: ITask) => {
@@ -49,11 +48,11 @@ const TaskProvider: React.FC<TaskContextProps> = ({ children }) => {
   };
 
   const filterTasks = (priority: string) => {
-    console.log(priority)
-    if (priority !== 'All') {
+    console.log(priority);
+    if (priority !== "All") {
       const newList = tasks.filter((t) => t.priority === priority);
       setFiltredTasks(newList);
-      console.log(newList)
+      console.log(newList);
     } else {
       setFiltredTasks(tasks);
     }
@@ -70,19 +69,16 @@ const TaskProvider: React.FC<TaskContextProps> = ({ children }) => {
   };
 
   return (
-    <TaskContext.Provider value={contextValue}>
-      {children}
-    </TaskContext.Provider>
+    <TaskContext.Provider value={contextValue}>{children}</TaskContext.Provider>
   );
 };
 
 const useTaskContext = (): TaskContextValue => {
   const context = useContext(TaskContext);
   if (!context) {
-    throw new Error('useTaskContext must be used within a TaskProvider');
+    throw new Error("useTaskContext must be used within a TaskProvider");
   }
   return context;
 };
 
 export { TaskProvider, useTaskContext };
-
