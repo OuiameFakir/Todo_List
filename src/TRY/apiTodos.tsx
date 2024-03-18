@@ -35,28 +35,11 @@ function Todos() {
           <div className="m-3">
             <Link to="/" className="text-decoration-none">
               {" "}
-              {`<--  Homme`}{" "}
+              {`<-  Homme`}{" "}
             </Link>
           </div>
           <br />
-          <Row>
-            <Col xs="10">
-              <input
-                {...register("todoTitle")}
-                type="text"
-                placeholder="Enter Your Todo!"
-                className="w-100"
-              />
-            </Col>
-            <Col xs="2">
-              <button
-                className="btn w-100 text-light bg-success"
-                onClick={handleSubmit(onSubmit)}
-              >
-                ADD
-              </button>
-            </Col>
-          </Row>
+          <h2 className="text text-warning">Fetching an API of Todos</h2>
           <Row>
             {data.map((todo: ITodos) => {
               return (
